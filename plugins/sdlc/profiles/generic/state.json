@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "change": "CHANGE-01",
+  "title": "First change — to be defined in the intent phase",
+  "stage": "",
+  "phase": "survey",
+  "status": "in_progress",
+  "risk": "R1",
+  "mode": "auto",
+  "next": "Survey the repository, then brainstorm the first change with the owner.",
+  "gates": [],
+  "queue": [],
+  "history": []
+}

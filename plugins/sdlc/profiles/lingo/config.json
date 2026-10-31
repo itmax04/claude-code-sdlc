@@ -1,0 +1,77 @@
+{
+  "project": "Lingo",
+  "owner": "itmax04",
+  "owner_language": "Russian",
+  "repo_language": "English (Russian/German only as language data — AGENTS.md §7)",
+  "changes_dir": "docs/changes",
+  "risk_default": "R1",
+  "autonomy": "high",
+  "merge_policy": "agent",
+  "merge_note": "Owner decisions 2026-10-29: the executor merges ready PRs of accepted stages after CI, AI review and gates (DG-03 'A; без моего просмотра, проверки ИИ остаются'; packet DECISIONS 'исполнитель также сливает готовые PR'). Existing PRs #1/#31/#34/#33 are merged only after gate G-CHAIN / their own stage gates. Never --admin, never push to main.",
+  "review_policy": "ai",
+  "review_note": "D04-01: AI-only review for R2/R3, no mandatory human reviewer.",
+  "protected_branches": [
+    "main",
+    "main-en"
+  ],
+  "commands": {
+    "build": "swift build",
+    "test": "swift test",
+    "app": "scripts/build-app.sh",
+    "ios_core": "scripts/check-core-ios.sh",
+    "secret_scan": "scripts/secret-scan.sh",
+    "language": "scripts/check-english.sh",
+    "web": "npm ci && npm test (from LINGO-03 P-07 on)",
+    "note": "After LINGO-03 P-01 the Mac package moves to apps/mac: add --package-path apps/mac and use apps/mac/scripts/…"
+  },
+  "github": {
+    "issues": true,
+    "milestones": true,
+    "repo": "itmax04/lingo"
+  },
+  "release": {
+    "enabled": true,
+    "owner_run": true
+  },
+  "deny_commands": [
+    "wrangler\\s+(secret|login|logout|deploy|delete|kv\\s+namespace\\s+delete)",
+    "wrangler\\s+d1\\s+\\S+.*--remote",
+    "\\bsecurity\\s+(add|delete|import|set|unlock|default)-",
+    "\\btccutil\\b",
+    "\\bdefaults\\s+(write|delete)\\b",
+    "\\bxcrun\\s+notarytool\\b",
+    "\\bgh\\s+release\\s+(create|delete|upload|edit)"
+  ],
+  "protected_paths": [
+    "private/**",
+    ".dev.vars",
+    "services/engine/.dev.vars"
+  ],
+  "secret_allowlist_paths": [
+    "scripts/secret-scan.sh"
+  ],
+  "night_only_commands": [
+    "--eval-dialog",
+    "lingo-eval\\s+dialog",
+    "--blind-review"
+  ],
+  "night_window": {
+    "tz": "Europe/Berlin",
+    "start": "23:00",
+    "end": "08:00"
+  },
+  "max_auto_continuations": 80,
+  "hard_rules": [
+    "$0: nothing that costs money or needs a card (no paid APIs, ImageGen or fallbacks).",
+    "Secrets never in code, logs, tests, commits, issues, PRs or chat; the owner enters keys in the Mac app, the Keychain or `wrangler secret put`.",
+    "No account creation, no changes to macOS settings/TCC/Keychain trust or provider consoles — give the owner exact steps.",
+    "Dialogue evals and bulk model calls only 23:00–08:00 Europe/Berlin, budgeted (count retries); daytime: single requests. On 429 no retry loops.",
+    "Audio is never stored or logged; logs never contain utterance text or keys.",
+    "No pronunciation assessment in any form (no_pronunciation eval = 100 %).",
+    "Dependencies only from ADR-0001 (Mac) / ADR-0002 (web+engine) allow-lists.",
+    "Contracts first: shared Swift/TS behaviour changes packages/contracts and both implementations in one PR.",
+    "Repository text in English; the owner is addressed in Russian.",
+    "Swift/Mac/native and mixed-parity changes run on the owner's Mac (local session); TS/docs/mocks may run in the cloud.",
+    "Production deploys, remote D1 migrations, devices and live tests are owner-run checkpoints."
+  ]
+}

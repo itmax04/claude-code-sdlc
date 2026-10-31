@@ -1,0 +1,12 @@
+{
+  "name": "claude-code-sdlc",
+  "description": "itmax04's Claude Code SDLC plugin",
+  "owner": {"name": "itmax04"},
+  "plugins": [
+    {
+      "name": "sdlc",
+      "source": "./plugins/sdlc",
+      "description": "Risk-based AI-native SDLC: /sdlc:run, /sdlc:status, /sdlc:decide, /sdlc:init, /sdlc:incident; reviewer and verifier agents; guardrail and continuation hooks."
+    }
+  ]
+}

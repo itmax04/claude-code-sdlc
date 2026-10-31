@@ -1,0 +1,11 @@
+{
+  "name": "sdlc",
+  "displayName": "Claude Code SDLC",
+  "version": "1.0.0",
+  "description": "Risk-based AI-native SDLC for Claude Code: one command (/sdlc:run) drives survey → intent → spec → plan → build → verify → review → release → maintain with state in the repository, independent reviewer/verifier agents, guardrail hooks and auto-continuation until an owner gate.",
+  "author": {"name": "itmax04", "url": "https://github.com/itmax04"},
+  "homepage": "https://github.com/itmax04/claude-code-sdlc",
+  "repository": "https://github.com/itmax04/claude-code-sdlc",
+  "license": "MIT",
+  "keywords": ["sdlc", "workflow", "autonomy", "review", "hooks", "lingo"]
+}

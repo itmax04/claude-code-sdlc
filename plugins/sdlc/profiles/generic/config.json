@@ -1,0 +1,30 @@
+{
+  "project": "",
+  "owner_language": "Russian",
+  "repo_language": "English",
+  "changes_dir": "docs/changes",
+  "risk_default": "R1",
+  "autonomy": "high",
+  "merge_policy": "owner",
+  "review_policy": "ai",
+  "protected_branches": ["main", "master"],
+  "commands": {
+    "build": "",
+    "test": "",
+    "lint": "",
+    "secret_scan": ""
+  },
+  "github": {"issues": false, "milestones": false},
+  "release": {"enabled": true, "owner_run": true},
+  "deny_commands": [],
+  "protected_paths": [".env", ".env.*", "private/**"],
+  "secret_allowlist_paths": [],
+  "night_only_commands": [],
+  "night_window": {"tz": "UTC", "start": "23:00", "end": "08:00"},
+  "max_auto_continuations": 60,
+  "hard_rules": [
+    "No paid services or spending without an owner gate.",
+    "Secrets never in code, logs, commits, issues, PRs or chat.",
+    "Never push to protected branches, force-push or rewrite history."
+  ]
+}

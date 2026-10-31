@@ -1,0 +1,76 @@
+{
+  "description": "SDLC plugin: guardrails (destructive git, protected branches, secrets, owner-only records), auto-run continuation and session status. All hooks are no-ops outside projects with a .sdlc/ folder.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/session_context.py"
+            ],
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/guard_bash.py"
+            ],
+            "timeout": 20
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/guard_write.py"
+            ],
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/stop_continue.py"
+            ],
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/scripts/owner_prompt.py"
+            ],
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
